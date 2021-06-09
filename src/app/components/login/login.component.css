@@ -1,3 +1,11 @@
-.login-component-container{
-    
+.title {
+    text-align: center;
+    padding-top: 20%;
+    font-family: 'Boogaloo';
+}
+
+.btn {
+    font-size: 20px;
+    background-color: black;
+    border-color: black;
 }

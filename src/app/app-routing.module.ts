@@ -6,11 +6,11 @@ import { LoginComponent } from './components/login/login.component';
 
 const routes: Routes = [
   // { path: '',   redirectTo: '/landing', pathMatch: 'full' },
-  { path: '', component: LandingPageComponent, pathMatch: 'full' },
-  { path: 'landing', component: LandingPageComponent, pathMatch: 'full' },
-  { path: 'error', component: ErrorComponent, pathMatch: 'full' },
-  { path: 'login', component: LoginComponent, pathMatch: 'full' },
-  { path: '**', redirectTo: '/error', pathMatch: 'full' },
+  // { path: '', component: LandingPageComponent, pathMatch: 'full' },
+  // { path: 'landing', component: LandingPageComponent, pathMatch: 'full' },
+  // { path: 'error', component: ErrorComponent, pathMatch: 'full' },
+  // { path: 'login', component: LoginComponent, pathMatch: 'full' },
+  // { path: '**', redirectTo: '/error', pathMatch: 'full' },
 ];
 
 @NgModule({
