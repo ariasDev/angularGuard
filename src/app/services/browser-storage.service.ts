@@ -15,4 +15,10 @@ export class BrowserStorageService {
   getItem(key: string) {
     return localStorage.getItem(key);
   }
+
+  logOut(): void {
+    localStorage.removeItem('token');
+    localStorage.removeItem('name');
+    localStorage.removeItem('email');
+  }
 }
