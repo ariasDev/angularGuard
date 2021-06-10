@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router'
+import { Router } from '@angular/router';
+import { BrowserStorageService } from 'src/app/services/browser-storage.service';
 
 @Component({
   selector: 'app-landing-page',
@@ -8,12 +9,21 @@ import { Router } from '@angular/router'
 })
 export class LandingPageComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private readonly router: Router, private readonly browserStorageService: BrowserStorageService) { }
 
   ngOnInit(): void {
+    this.getToken();
   }
 
-  goTo(action: string) {
+  getToken(): void {
+    const token = this.browserStorageService.getItem('token');
+    console.log(token);
+    if (token) {
+      this.goTo('home');
+    }
+  }
+
+  goTo(action: string): void {
     this.router.navigate([`${action}`]);
   }
 

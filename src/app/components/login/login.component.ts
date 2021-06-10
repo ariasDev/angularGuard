@@ -1,6 +1,10 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { LoginResponse } from 'src/app/models/loginResponse';
+import { BrowserStorageService } from 'src/app/services/browser-storage.service';
 import { AuthServiceService } from '../../services/auth-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +16,9 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private authServiceService: AuthServiceService
+    private authServiceService: AuthServiceService,
+    private browserStorageService: BrowserStorageService,
+    private readonly router: Router
   ) {
     this.userForm = this.fb.group({
       email: new FormControl('', [Validators.required, Validators.minLength(10)]),
@@ -24,7 +30,27 @@ export class LoginComponent implements OnInit {
   }
 
   login(): void {
-    console.log(this.userForm);
+    if (this.userForm.valid) {
+      this.authServiceService.login(this.userForm.value).subscribe(
+        (response: LoginResponse) => {
+          this.browserStorageService.setItem('token', response.userData.token);
+          this.browserStorageService.setItem('name', response.userData.userName);
+          this.browserStorageService.setItem('email', response.userData.userEmail);
+          alert('Se ha iniciado sesion correctamente');
+          this.userForm.reset();
+          this.goTo('home');
+        },
+        (reject: HttpErrorResponse) => {
+          alert(`Error iniciando sesion, ${reject.error.errorDescription}`);
+        }
+      );
+    } else {
+      alert('problemas iniciando sesion');
+    }
+  }
+
+  goTo(action: string): void {
+    this.router.navigate([`${action}`]);
   }
 
   get email(): AbstractControl { return this.userForm.get('email') || new FormControl(''); }
