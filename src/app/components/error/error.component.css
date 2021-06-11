@@ -1,0 +1,17 @@
+.notfound-container{
+  background-color: black;
+  height: 100%;
+}
+
+.title{
+  color: aliceblue;
+  font-family: 'Boogaloo';
+  text-align: center;
+  padding-top: 10%;
+}
+
+.gif-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

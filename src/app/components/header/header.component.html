@@ -1,0 +1,8 @@
+<div class="header-component">
+  <div class="left-side">
+    <button class="btn home-btn" (click)="goTo('')">Inicio</button>
+  </div>
+  <div class="right-side">
+    <button class="btn logout-btn" (click)="logOut()" *ngIf="isLogged">Cerrar sesion</button>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+.home-container{
+  height: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card{
+  background-color: rgb(63, 61, 61);
+  color: whitesmoke;
+}

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthServiceService } from 'src/app/services/auth-service.service';
 import { BrowserStorageService } from 'src/app/services/browser-storage.service';
 
 @Component({
@@ -9,18 +10,13 @@ import { BrowserStorageService } from 'src/app/services/browser-storage.service'
 })
 export class LandingPageComponent implements OnInit {
 
-  constructor(private readonly router: Router, private readonly browserStorageService: BrowserStorageService) { }
+  constructor(
+    private readonly router: Router,
+    private readonly browserStorageService: BrowserStorageService,
+    private readonly authServiceService: AuthServiceService
+  ) { }
 
   ngOnInit(): void {
-    this.getToken();
-  }
-
-  getToken(): void {
-    const token = this.browserStorageService.getItem('token');
-    console.log(token);
-    if (token) {
-      this.goTo('home');
-    }
   }
 
   goTo(action: string): void {

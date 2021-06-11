@@ -1,10 +1,10 @@
 <div class="login-component-container container">
-  <h1 class="title">Estas a un paso de ingrear</h1>
+  <h1 class="title">Inicio de sesión</h1>
   <form [formGroup]="userForm">
-    <div class="row">
+    <div class="row  pb-4">
       <div class="col-12">
         <label for="exampleInputEmail1">Correo Electronico</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+        <input type="email" autocomplete="off" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
           placeholder="Ingresa tu correo Electronico" formControlName="email">
       </div>
       <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert-danger ml-3">
@@ -16,7 +16,7 @@
         </div>
       </div>
     </div>
-    <div class="row">
+    <div class="row pb-4">
       <div class="col-12">
         <label for="exampleInputPassword1">Contraseña</label>
         <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Ingresa tu contraseña"
@@ -24,7 +24,7 @@
       </div>
       <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert-danger ml-3">
         <div class="container-error-message" *ngIf="password.errors?.required">
-          La contraseña es obligatorio
+          La contraseña es obligatoria
         </div>
         <div class="container-error-message" *ngIf="password.errors?.minlength">
           El minimo de caracteres para la contraseña es de 8
@@ -33,6 +33,6 @@
     </div>
   </form>
   <div class="row mt-5" style="justify-content: center;">
-    <button type="submit" class="btn btn-primary col-11 col-md-2" (click)="login()">Ingresar</button>
+    <button type="submit" class="btn btn-primary col-11 col-md-2 btn-flotante" (click)="login()">Ingresar</button>
   </div>
 </div>

@@ -5,6 +5,7 @@ import { LoginResponse } from 'src/app/models/loginResponse';
 import { BrowserStorageService } from 'src/app/services/browser-storage.service';
 import { AuthServiceService } from '../../services/auth-service.service';
 import { Router } from '@angular/router';
+import { LoggedBehaviorSubjectService } from 'src/app/services/logged-behavior-subject.service';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,8 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private authServiceService: AuthServiceService,
     private browserStorageService: BrowserStorageService,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly loggedBehaviorSubjectService: LoggedBehaviorSubjectService
   ) {
     this.userForm = this.fb.group({
       email: new FormControl('', [Validators.required, Validators.minLength(10)]),
@@ -27,6 +29,13 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.isLogged();
+  }
+
+  isLogged(): void {
+    if (this.browserStorageService.getItem('token')) {
+      this.goTo('home');
+    }
   }
 
   login(): void {
@@ -36,7 +45,7 @@ export class LoginComponent implements OnInit {
           this.browserStorageService.setItem('token', response.userData.token);
           this.browserStorageService.setItem('name', response.userData.userName);
           this.browserStorageService.setItem('email', response.userData.userEmail);
-          alert('Se ha iniciado sesion correctamente');
+          this.loggedBehaviorSubjectService.setIslogged(true);
           this.userForm.reset();
           this.goTo('home');
         },
